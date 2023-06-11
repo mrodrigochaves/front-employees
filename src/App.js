@@ -1,6 +1,18 @@
 import { Box, Center, Flex, Avatar, Heading, Card, CardHeader, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from 'react';
+import api from "./service/api";
 
-function App() {
+export default function App() {
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    api.get("/employees")
+      .then((response) => setEmployees(response.data))
+      .catch((err) => {
+        console.error("Oops! An error occurred: " + err);
+      });
+  }, []);
+
   return (
     <Box h="100vh">
       <Center
@@ -30,76 +42,32 @@ function App() {
           p="6"
           boxShadow="0 1px 2px #ccc"
         >
-          <Card maxW='md'>
-            <CardHeader>
-              <Flex spacing='4'>
-                <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                  <Avatar name='Marcio Rodrigo' src='https://sttotv8prodmedia.blob.core.windows.net/mediacache/4/e/4/8/3/4/4e483472bd85797f16c1dbd376df2783a826e593.jpg' />
-                  <Box>
-                    <Heading size='sm' name="title" >Senior Java Developer</Heading>
-                  </Box>
-                  <Box>
-                    <Text name="name">Name: José</Text>
-                    <Text name="lastName"> Last Name: Mourinho</Text>
-                    <Text name="department">Depatment: Software Development</Text>
-                  </Box>
+          {employees.map((employee) => (
+            <Card maxW="md" key={employee.id}>
+              <CardHeader>
+                <Flex spacing="4">
+                  <Flex
+                    flex="1"
+                    gap="4"
+                    alignItems="center"
+                    flexWrap="wrap"
+                  >
+                    <Avatar name='Marcio Rodrigo' src='https://sttotv8prodmedia.blob.core.windows.net/mediacache/4/e/4/8/3/4/4e483472bd85797f16c1dbd376df2783a826e593.jpg' />
+                    <Box>
+                      <Heading size="sm">{employee.title}</Heading>
+                    </Box>
+                    <Box>
+                      <Text>Name: {employee.name}</Text>
+                      <Text>Last Name: {employee.lastName}</Text>
+                      <Text>Department: {employee.department}</Text>
+                    </Box>
+                  </Flex>
                 </Flex>
-              </Flex>
-            </CardHeader>
-          </Card>
-          <Card maxW='md'>
-            <CardHeader>
-              <Flex spacing='4'>
-                <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                  <Avatar name='Marcio Rodrigo' src='https://sttotv8prodmedia.blob.core.windows.net/mediacache/4/e/4/8/3/4/4e483472bd85797f16c1dbd376df2783a826e593.jpg' />
-                  <Box>
-                    <Heading size='sm' name="title" >Senior Java Developer</Heading>
-                  </Box>
-                  <Box>
-                    <Text name="name">Name: José</Text>
-                    <Text name="lastName"> Last Name: Mourinho</Text>
-                    <Text name="department">Depatment: Software Development</Text>
-                  </Box>
-                </Flex>
-              </Flex>
-            </CardHeader>
-          </Card> <Card maxW='md'>
-            <CardHeader>
-              <Flex spacing='4'>
-                <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                  <Avatar name='Marcio Rodrigo' src='https://sttotv8prodmedia.blob.core.windows.net/mediacache/4/e/4/8/3/4/4e483472bd85797f16c1dbd376df2783a826e593.jpg' />
-                  <Box>
-                    <Heading size='sm' name="title" >Senior Java Developer</Heading>
-                  </Box>
-                  <Box>
-                    <Text name="name">Name: José</Text>
-                    <Text name="lastName"> Last Name: Mourinho</Text>
-                    <Text name="department">Depatment: Software Development</Text>
-                  </Box>
-                </Flex>
-              </Flex>
-            </CardHeader>
-          </Card> <Card maxW='md'>
-            <CardHeader>
-              <Flex spacing='4'>
-                <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                  <Avatar name='Marcio Rodrigo' src='https://sttotv8prodmedia.blob.core.windows.net/mediacache/4/e/4/8/3/4/4e483472bd85797f16c1dbd376df2783a826e593.jpg' />
-                  <Box>
-                    <Heading size='sm' name="title" >Senior Java Developer</Heading>
-                  </Box>
-                  <Box>
-                    <Text name="name">Name: José</Text>
-                    <Text name="lastName"> Last Name: Mourinho</Text>
-                    <Text name="department">Depatment: Software Development</Text>
-                  </Box>
-                </Flex>
-              </Flex>
-            </CardHeader>
-          </Card>
+              </CardHeader>
+            </Card>
+          ))}
         </Center>
       </Flex>
     </Box>
   );
 }
-
-export default App;

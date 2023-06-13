@@ -1,5 +1,5 @@
 ### Implementação do Projeto de Diretório de Funcionários.
-Aplicativo Java RESTful baseado em Microsserviços.
+Aplicativo React fron-end.
 
 # 💻 Stacks utilizadas:
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white) ![Axios](https://img.shields.io/badge/axios-red.svg?style=for-the-badge&logo=axios&logoColor=671ddf)
